@@ -1,0 +1,31 @@
+{
+  "name": "drupal/scroll_to_top",
+  "description": "This module uses a jQuery script to provide an animated scroll to top link in the bottom of the page.",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "keywords": ["Drupal"],
+  "homepage": "https://www.drupal.org/project/scroll_to_top",
+  "authors": [
+    {
+      "name": "Tarek Djebali (tarekdj)",
+      "homepage": "https://www.drupal.org/u/tarekdj",
+      "role": "Maintainer"
+    },
+    {
+      "name": "https://www.drupal.org/u/acke",
+      "homepage": "https://www.drupal.org/u/acke",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Viktor Holovachek (AstonVictor)",
+      "homepage": "https://www.drupal.org/u/astonvictor",
+      "role": "Maintainer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/scroll_to_top",
+    "source": "https://git.drupalcode.org/project/scroll_to_top"
+  },
+  "require": {  }
+}

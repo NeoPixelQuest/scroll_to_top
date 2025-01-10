@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Provide scroll to top link.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function scroll_to_top_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.scroll_to_top':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module uses a jQuery script to provide an animated scroll to top link in the bottom of the page.') . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function scroll_to_top_page_attachments(array &$attachments) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  $admin_theme = \Drupal::config('system.theme')->get('admin');
+
+  $config = \Drupal::configFactory()->getEditable('scroll_to_top.settings');
+  $values = $config->getRawData();
+
+  // Let other modules alter configs.
+  \Drupal::moduleHandler()->alter('scroll_to_top_configs', $values);
+
+  if ($values['scroll_to_top_enable_admin_theme'] == TRUE || ($values['scroll_to_top_enable_admin_theme'] == FALSE && ($theme != $admin_theme))) {
+    $attachments['#attached']['library'][] = 'scroll_to_top/scroll_to_top';
+
+    // Building the css style.
+    $position = '';
+    // Button position.
+    if ($values['scroll_to_top_position'] == 1) {
+      $position = "#back-top { right:40px; }";
+    }
+
+    if ($values['scroll_to_top_position'] == 3) {
+      $position = $position = "#back-top { left:50%;margin:0px;}";
+    }
+
+    // Display label.
+    if ($values['scroll_to_top_display_text'] == FALSE) {
+      $display = "span#link {display : none;}";
+    }
+    else {
+      $display = '';
+    }
+
+    // Background color on hover.
+    $bgcolor = "#back-top span#button { background-color: " . $values['scroll_to_top_bg_color_out'] . ";}";
+    $bgcolor .= " #back-top span#button:hover {opacity:1;filter:opacity(100%);background-color: " . $values['scroll_to_top_bg_color_hover'] . ";}";
+
+    $css = $position;
+    $css .= $bgcolor;
+    $css .= $display;
+
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#tag' => 'style',
+        '#value' => $css . '',
+      ], 'scroll_to_top_new_css',
+    ];
+
+    $attachments['#attached']['drupalSettings']['scroll_to_top']['label'] = $values['scroll_to_top_label'];
+  }
+}

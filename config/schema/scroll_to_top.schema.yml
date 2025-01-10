@@ -1,0 +1,22 @@
+scroll_to_top.settings:
+  type: config_object
+  label: 'Scroll to top settings'
+  mapping:
+    scroll_to_top_label:
+      type: string
+      label: 'Label'
+    scroll_to_top_position:
+      type: integer
+      label: 'Position'
+    scroll_to_top_bg_color_hover:
+      type: string
+      label: 'Background color on mouse over.'
+    scroll_to_top_bg_color_out:
+      type: string
+      label: 'Background color on mouse out'
+    scroll_to_top_display_text:
+      type: boolean
+      label: 'Display label'
+    scroll_to_top_enable_admin_theme:
+      type: boolean
+      label: 'Enable on administration theme'
